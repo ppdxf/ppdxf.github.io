@@ -1,375 +1,247 @@
-<!DOCTYPE HTML>
-
-    <html lang="zh-Hans">
-  
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8">
-  
-  <title>ppdxf</title>
-  <meta name="author" content="xubo zhao">
-  
-  <meta name="description" content="一个人的博客">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
 
-  
-  <meta property="og:site_name" content="ppdxf"/>
-
-  
-    <meta property="og:image" content="undefined"/>
-  
-
-  
-    <meta http-equiv="Content-Language" content="zh-Hans"/>
-  
-
-  <link href="/img/favicon.png" rel="icon">
-  
-    <link rel="apple-touch-icon" href="/img/apple-icon.ico">
-    <link rel="apple-touch-icon-precomposed" href="/img/apple-icon.ico">
     
 
-  <link rel="alternate" href="/dark-tech/atom.xml" title="ppdxf" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+    <title>
+      ppdxf 
+    </title>
 
-  
-  <!-- Chinese readability improment -->
-  <style type="text/css">
-    article {font-weight: 400;letter-spacing: .01rem;}
-    article .entry{line-height:2;}
-  </style>
-  
-  
-  <style type="text/css">
-  /* Tim Pietrusky advanced checkbox hack (Android <= 4.1.2) */
-body{ -webkit-animation: bugfix infinite 1s; }
-@-webkit-keyframes bugfix { from {padding:0;} to {padding:0;} }
-</style>
-
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-
-  <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-48887175-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
-
-
-  
-    <!-- 360 Font and Baidu CDN in China -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     
-      <link href='//fonts.googleapis.com/css?family=Open+Sans:300,400|Playball' rel='stylesheet' type='text/css'>
+      <meta name="author" content="xubo zhao">
     
-  <link href='//apps.bdimg.com/libs/fontawesome/4.1.0/css/font-awesome.css' rel='stylesheet' type='text/css'>
-  <script src="//libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
-  
+    
+      <meta name="description" content="一个人的博客">
+    
 
+    <meta name="description" content="一个人的博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ppdxf">
+<meta property="og:url" content="http://ppdxf.com/index.html">
+<meta property="og:site_name" content="ppdxf">
+<meta property="og:description" content="一个人的博客">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ppdxf">
+<meta name="twitter:description" content="一个人的博客">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
 
-
-<!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
 </head>
-
-
 <body>
-  <header id="header" class="inner"><div class="padding">
-	<div class="alignleft logo">
-	  <h1><a href="/">ppdxf</a></h1>
-	</div>
-	<nav id="main-nav" class="alignright">
-		<input type="checkbox" id="toggle" />
-		<label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu" onclick><i class="fa fa-bars"></i></label>
-	  <ul class="menu">
-	    
-	      <li><a href="/dark-tech/">Home</a></li>
-	    
-	      <li><a href="/dark-tech/archives">Archives</a></li>
-	    
-	      <li><a href="/about">About</a></li>
-	    
-	      <li><a href="/guestbook">GuestBook</a></li>
-	    
-	    
-	    	<li><a href="/dark-tech/atom.xml" target="_blank" title="bruce tan blog rss" class="rss-top"><i class="fa fa-rss"></i></a></li>
-	    
-	  </ul>
-	</nav>
-	<div class="clearfix"></div>
-</div>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+ 
+<header class="panel-cover">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">ppdxf</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          the stack of ppdxf
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
 </header>
-  <div id="page-heading-wrap">
-  	<div class="inner">
-      <div class="padding">
-    		
-          <h2>the stack of ppdxf</h2>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+
+   <!-- do nothing -->
+
+
+<div class="main-post-list">
+    <ol class="post-list">
+    
+    
+    <li>
+
+      <h2 class="post-list__post-title post-title">
+        <a href="/2017/05/24/first/" title="link to first">first</a>
+      </h2>
+
+      <div class="post-list__meta">
+
+        <time datetime="2017-05-24" class="post-list__meta--date date">2017-05-24</time> 
+      </div>
+
+      <div class="excerpt">
         
       </div>
-  	</div>
-  </div>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper" class="padding">
-  <article class="post">
-  
-  
-    <div class="post-content-index">
-  
-      
-        <header>
-          <div class="icon"></div>
-            
+
+      <hr class="post-list__divider" />
+    </li>
     
-      <h1 class="title transition"><a href="/2017/05/24/first/">first</a></h1>
-    
-  
-          <ul>
-            <li>
-              <span class="heading-span">Posted on: </span>
-              <time datetime="2017-05-24T11:38:04.000Z">2017-05-24</time>
-            </li>
-            
-              <li>
-                <span class="heading-span">By: </span>
+    <li>
 
-                
-                  <a href="/" target="_blank">xubo zhao</a>
+      <h2 class="post-list__post-title post-title">
+        <a href="/2017/05/24/hello-world/" title="link to Hello World">Hello World</a>
+      </h2>
 
-                
+      <div class="post-list__meta">
 
-              </li>
-            
-            <li>
-              <span class="heading-span">With: </span>
-              
-          </ul>
-        </header>
-      
-      <div class="entry">
-        
-          
-            你好 欢迎来到我的个人技术博客 ddddddddddd
-          
+        <time datetime="2017-05-24" class="post-list__meta--date date">2017-05-24</time> 
+      </div>
+
+      <div class="excerpt">
         
       </div>
-      <footer>
-        
-          <div class="alignright">
-            <a href="/2017/05/24/first/#more" class="more-link">Continue Reading<i class="fa fa-long-arrow-right fa-1"></i></a>
-          </div>
-        
-        <div class="clearfix"></div>
-      </footer>
-    </div>
-</article>
 
-
-
-
-  <article class="post">
-  
-  
-    <div class="post-content-index">
-  
-      
-        <header>
-          <div class="icon"></div>
-            
+      <hr class="post-list__divider" />
+    </li>
     
-      <h1 class="title transition"><a href="/2017/05/24/hello-world/">Hello World</a></h1>
+  </ol>
+
+  <hr class="post-list__divider " />
+
+<nav class="pagination" role="navigation">
     
-  
-          <ul>
-            <li>
-              <span class="heading-span">Posted on: </span>
-              <time datetime="2017-05-24T03:07:26.176Z">2017-05-24</time>
-            </li>
-            
-              <li>
-                <span class="heading-span">By: </span>
 
-                
-                  <a href="/" target="_blank">xubo zhao</a>
-
-                
-
-              </li>
-            
-            <li>
-              <span class="heading-span">With: </span>
-              
-          </ul>
-        </header>
-      
-      <div class="entry">
-        
-          
-            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new &quot;My New Post&quot;
-More info: Writing
-Run server1$ hexo server
-More info: Server
-Generate static files1$ hexo generate
-More info: Generating
-Deploy to remote sites1$ hexo deploy
-More info: Deployment
-          
-        
-      </div>
-      <footer>
-        
-          <div class="alignright">
-            <a href="/2017/05/24/hello-world/#more" class="more-link">Continue Reading<i class="fa fa-long-arrow-right fa-1"></i></a>
-          </div>
-        
-        <div class="clearfix"></div>
-      </footer>
-    </div>
-</article>
+    <span class="pagination__page-number"> 1 / 1</span>
+    
+    
+</nav>
 
 
-
-
-
-<nav id="pagination">
-  
-  
-  <div class="clearfix"></div>
-</nav></div></div>
-    <aside id="sidebar" class="alignright"><div class="padding">
-	
-	  <div class="search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" autocomplete="off" name="q" maxlength="20" results="0" placeholder="搜索">
-    <input type="hidden" name="q" value="site:ppdxf.com">
-  </form>
 </div>
-	
-	  
-	
-	  
-<div class="widget recent-post">
-  <h3 class="title">最新文章</h3>
-  <ul class="entry">
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
     
-      <li>
-        <a href="/2017/05/24/first/">first</a>
-      </li>
-    
-      <li>
-        <a href="/2017/05/24/hello-world/">Hello World</a>
-      </li>
-    
-  </ul>
-</div>
-
-	
-	  
-	
-	  <iframe width="100%" height="120" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=10&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=5594792135&verifier=676ff25e&dpc=1"></iframe>
-	
-	  <div class="widget category">
-	<h3 class="title">Link</h3>
-	<ul class="entry">
-		
-        	<li><a href="https://www.google.com/">Google</a></li>
-      	
-        	<li><a href="https://github.com/">Github</a></li>
-      	
-        	<li><a href="http://hijiangtao.github.io/">hijiangtao</a></li>
-      	
-	</ul>
-</div>
-	
-</div></aside>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div class="padding">
-	<div class="alignleft">
-	  
-	  Copyright&copy;2013-2017 <a href=" / ">xubo zhao</a>
-	  
-	  | Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-	  and Theme by <a href="https://github.com/hijiangtao/dark-tech/" target="_blank">Dark-Tech</a> | <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1000257487'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s96.cnzz.com/z_stat.php%3Fid%3D1000257487' type='text/javascript'%3E%3C/script%3E"));</script>
-	</div>
-
-	<div class="alignright">
-		
-		
-			<a href="https://github.com/hijiangtao" target="_blank" title="xubo zhao Github"><i class="fa fa-github-square"></i></a>	
-		
-		
-		
-			<a href="http://www.weibo.com/hijiangtao" target="_blank" title="xubo zhao Weibo"><i class="fa fa-weibo"></i></a>	
-		
-		
-		
-		
-			<a href="/dark-tech/atom.xml" target="_blank" title="xubo zhao RSS"><i class="fa fa-rss-square"></i></a>
-		
-	</div>
-
-	<div class="clearfix"></div>
-</div>
-
-<div class="scroll-top"><i class="fa fa-arrow-circle-up"></i></div>
 </footer>
-  
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
 
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.js"></script>
-<script src="/js/gallery.js"></script>
-
-
-
-<script type="text/javascript">
-$(window).scroll(function() {
-
-    if($(this).scrollTop() > 400) {
-        $('.scroll-top').fadeIn(200);
-    } else {
-        $('.scroll-top').fadeOut(200);
-    }
-});
-
-$('.scroll-top').bind('click', function(e) {
-    e.preventDefault();
-    $('body,html').animate({scrollTop:0},200);
-});
-</script>
+    
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
 
 </body>
 </html>
