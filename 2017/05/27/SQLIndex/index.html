@@ -1,197 +1,353 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-    
 
-    <title>
-      SQLIndex 一次SQL不断优化的体验 | ppdxf 
-    </title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    
-      <meta name="author" content="xubo zhao">
-    
-    
 
-    <meta name="description" content="这是我的用hexo搭建完成博客后的第一篇文章，最近刚好在研究SQL的优化，在博客中看到了其他博主的文章和评论，自己尝试的结果。原文地址 问题描述：程序员除了和自己的语言打交道最多之外，剩下的便是同SQL语句了，用来操纵数据库。那么简答的命令在数据量非常小的时候基本上是可以忽略时间的，但是一旦数据量加大那么SQL优化就显得尤为重要。 场景： 课程表：1234567create table Cours">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="SQL优化 数据库：MySQL," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="这是我的用hexo搭建完成博客后的第一篇文章，最近刚好在研究SQL的优化，在博客中看到了其他博主的文章和评论，自己尝试的结果。原文地址">
 <meta name="keywords" content="SQL优化 数据库：MySQL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQLIndex 一次SQL不断优化的体验 | ppdxf">
+<meta property="og:title" content="SQLIndex 一次SQL不断优化的体验">
 <meta property="og:url" content="http://ppdxf.com/2017/05/27/SQLIndex/index.html">
 <meta property="og:site_name" content="ppdxf">
-<meta property="og:description" content="这是我的用hexo搭建完成博客后的第一篇文章，最近刚好在研究SQL的优化，在博客中看到了其他博主的文章和评论，自己尝试的结果。原文地址 问题描述：程序员除了和自己的语言打交道最多之外，剩下的便是同SQL语句了，用来操纵数据库。那么简答的命令在数据量非常小的时候基本上是可以忽略时间的，但是一旦数据量加大那么SQL优化就显得尤为重要。 场景： 课程表：1234567create table Cours">
+<meta property="og:description" content="这是我的用hexo搭建完成博客后的第一篇文章，最近刚好在研究SQL的优化，在博客中看到了其他博主的文章和评论，自己尝试的结果。原文地址">
 <meta property="og:image" content="http://ppdxf.com/2017/05/27/SQLIndex/images/1495842119499.jpg">
 <meta property="og:image" content="http://oql36hmi5.bkt.clouddn.com/2.png">
 <meta property="og:image" content="http://oql36hmi5.bkt.clouddn.com/student_id.png">
 <meta property="og:image" content="http://ppdxf.com/2017/05/27/SQLIndex/images/1495842119499.jpg">
 <meta property="og:image" content="http://oql36hmi5.bkt.clouddn.com/2.png">
 <meta property="og:image" content="http://oql36hmi5.bkt.clouddn.com/student_id.png">
-<meta property="og:updated_time" content="2017-05-27T14:18:40.253Z">
+<meta property="og:updated_time" content="2017-05-30T16:11:20.160Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SQLIndex 一次SQL不断优化的体验 | ppdxf">
-<meta name="twitter:description" content="这是我的用hexo搭建完成博客后的第一篇文章，最近刚好在研究SQL的优化，在博客中看到了其他博主的文章和评论，自己尝试的结果。原文地址 问题描述：程序员除了和自己的语言打交道最多之外，剩下的便是同SQL语句了，用来操纵数据库。那么简答的命令在数据量非常小的时候基本上是可以忽略时间的，但是一旦数据量加大那么SQL优化就显得尤为重要。 场景： 课程表：1234567create table Cours">
+<meta name="twitter:title" content="SQLIndex 一次SQL不断优化的体验">
+<meta name="twitter:description" content="这是我的用hexo搭建完成博客后的第一篇文章，最近刚好在研究SQL的优化，在博客中看到了其他博主的文章和评论，自己尝试的结果。原文地址">
 <meta name="twitter:image" content="http://ppdxf.com/2017/05/27/SQLIndex/images/1495842119499.jpg">
-    
-    
-    
-      <link rel="icon" type="image/x-icon" href="/favicon.png">
-    
-    <link rel="stylesheet" href="/css/uno.css">
-    <link rel="stylesheet" href="/css/highlight.css">
-    <link rel="stylesheet" href="/css/archive.css">
-    <link rel="stylesheet" href="/css/china-social-icon.css">
 
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://ppdxf.com/2017/05/27/SQLIndex/"/>
+
+
+
+
+
+  <title>SQLIndex 一次SQL不断优化的体验 | ppdxf</title>
 </head>
-<body>
 
-    <span class="mobile btn-mobile-menu">
-        <i class="icon icon-list btn-mobile-menu__icon"></i>
-        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7cc4a940ad9f539bb3fe8743106ab79d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ppdxf</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">尼古拉斯·旭博·赵的博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://ppdxf.com/2017/05/27/SQLIndex/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xubo zhao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ppdxf">
     </span>
 
     
-
-<header class="panel-cover panel-cover--collapsed">
-
-
-  <div class="panel-main">
-
-  
-    <div class="panel-main__inner panel-inverted">
-    <div class="panel-main__content">
+      <header class="post-header">
 
         
-
-        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">ppdxf</a></h1>
-        <hr class="panel-cover__divider" />
-
         
-        <p class="panel-cover__description">
-          尼古拉斯·旭博·赵的博客
-        </p>
-        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+          <h1 class="post-title" itemprop="name headline">SQLIndex 一次SQL不断优化的体验</h1>
         
 
-        <div class="navigation-wrapper">
-
-          <nav class="cover-navigation cover-navigation--primary">
-            <ul class="navigation">
-
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
               
-                
-                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+                <span class="post-meta-item-text">Posted on</span>
               
-                
-                <li class="navigation__item"><a href="/myself" title="" class="">关于</a></li>
-              
-                
-                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">归档</a></li>
-              
-
-            </ul>
-          </nav>
-
-          <!-- ----------------------------
-To add a new social icon simply duplicate one of the list items from below
-and change the class in the <i> tag to match the desired social network
-and then add your link to the <a>. Here is a full list of social network
-classes that you can use:
-
-    icon-social-500px
-    icon-social-behance
-    icon-social-delicious
-    icon-social-designer-news
-    icon-social-deviant-art
-    icon-social-digg
-    icon-social-dribbble
-    icon-social-facebook
-    icon-social-flickr
-    icon-social-forrst
-    icon-social-foursquare
-    icon-social-github
-    icon-social-google-plus
-    icon-social-hi5
-    icon-social-instagram
-    icon-social-lastfm
-    icon-social-linkedin
-    icon-social-medium
-    icon-social-myspace
-    icon-social-path
-    icon-social-pinterest
-    icon-social-rdio
-    icon-social-reddit
-    icon-social-skype
-    icon-social-spotify
-    icon-social-stack-overflow
-    icon-social-steam
-    icon-social-stumbleupon
-    icon-social-treehouse
-    icon-social-tumblr
-    icon-social-twitter
-    icon-social-vimeo
-    icon-social-xbox
-    icon-social-yelp
-    icon-social-youtube
-    icon-social-zerply
-    icon-mail
-
--------------------------------->
-
-<!-- add social info here -->
-
-
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="panel-cover--overlay"></div>
-  </div>
-</header>
-
-    <div class="content-wrapper">
-        <div class="content-wrapper__inner entry">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-27T06:21:05+08:00">
+                2017-05-27
+              </time>
             
 
-<article class="post-container post-container--single">
+            
 
-  <header class="post-header">
-    
-    <h1 class="post-title">SQLIndex 一次SQL不断优化的体验</h1>
-
-    
-
-    <div class="post-meta">
-      <time datetime="2017-05-27" class="post-meta__date date">2017-05-27</time> 
-
-      <span class="post-meta__tags tags">
+            
+          </span>
 
           
 
           
-             &#8226; 标签:
-            <font class="tags">
-              <a class="tags-link" href="/tags/SQL优化-数据库：MySQL/">SQL优化 数据库：MySQL</a>
-            </font>
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/05/27/SQLIndex/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
-      </span>
-    </div>
-    
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
     
 
-  </header>
+    <div class="post-body" itemprop="articleBody">
 
-  <section id="post-content" class="article-content post">
-    <p>这是我的用hexo搭建完成博客后的第一篇文章，最近刚好在研究SQL的优化，在博客中看到了其他博主的文章和评论，自己尝试的结果。<br><a href="http://www.cnblogs.com/tangyanbo/p/4462734.htm#undefined" target="_blank" rel="external">原文地址</a></p>
+      
+      
+
+      
+        <p>这是我的用hexo搭建完成博客后的第一篇文章，最近刚好在研究SQL的优化，在博客中看到了其他博主的文章和评论，自己尝试的结果。<br><a href="http://www.cnblogs.com/tangyanbo/p/4462734.htm#undefined" target="_blank" rel="external">原文地址</a><br><a id="more"></a></p>
 <h2 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h2><h4 id="程序员除了和自己的语言打交道最多之外，剩下的便是同SQL语句了，用来操纵数据库。那么简答的命令在数据量非常小的时候基本上是可以忽略时间的，但是一旦数据量加大那么SQL优化就显得尤为重要。"><a href="#程序员除了和自己的语言打交道最多之外，剩下的便是同SQL语句了，用来操纵数据库。那么简答的命令在数据量非常小的时候基本上是可以忽略时间的，但是一旦数据量加大那么SQL优化就显得尤为重要。" class="headerlink" title="程序员除了和自己的语言打交道最多之外，剩下的便是同SQL语句了，用来操纵数据库。那么简答的命令在数据量非常小的时候基本上是可以忽略时间的，但是一旦数据量加大那么SQL优化就显得尤为重要。"></a>程序员除了和自己的语言打交道最多之外，剩下的便是同SQL语句了，用来操纵数据库。那么简答的命令在数据量非常小的时候基本上是可以忽略时间的，但是一旦数据量加大那么SQL优化就显得尤为重要。</h4><hr>
-<h2 id="场景："><a href="#场景：" class="headerlink" title="场景："></a>场景：</h2><hr>
-<h3 id="课程表："><a href="#课程表：" class="headerlink" title="课程表："></a>课程表：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">create table Course(</div><div class="line"></div><div class="line">c_id int PRIMARY KEY,</div><div class="line"></div><div class="line">name varchar(10)</div><div class="line"></div><div class="line">)</div></pre></td></tr></table></figure>
+<h2 id="场景："><a href="#场景：" class="headerlink" title="场景："></a>场景：</h2><h3 id="课程表："><a href="#课程表：" class="headerlink" title="课程表："></a>课程表：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">create table Course(</div><div class="line"></div><div class="line">c_id int PRIMARY KEY,</div><div class="line"></div><div class="line">name varchar(10)</div><div class="line"></div><div class="line">)</div></pre></td></tr></table></figure>
 <p>学生表：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">create table Student(</div><div class="line"></div><div class="line">id int PRIMARY KEY,</div><div class="line"></div><div class="line">name varchar(10)</div><div class="line"></div><div class="line">)</div></pre></td></tr></table></figure></p>
 <p>学生成绩表：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">CREATE table SC(</div><div class="line"></div><div class="line">    sc_id int PRIMARY KEY,</div><div class="line"></div><div class="line">    s_id int,</div><div class="line"></div><div class="line">    c_id int,</div><div class="line"></div><div class="line">    score int</div><div class="line"></div><div class="line">)</div></pre></td></tr></table></figure></p>
 <p>因为大的数据量不容易模拟出来，所以借用评论下的模拟数据进行测试，程序如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line">drop table <span class="keyword">if</span> exists student;</div><div class="line"> </div><div class="line">create table <span class="keyword">if</span> not exists student</div><div class="line">(</div><div class="line">    student_id int not null auto_increment primary key,</div><div class="line">    student_name varchar(50) not null</div><div class="line">) engine = innodb default charset = utf8;</div><div class="line"> </div><div class="line"> </div><div class="line">drop table <span class="keyword">if</span> exists course;</div><div class="line"> </div><div class="line">create table <span class="keyword">if</span> not exists course</div><div class="line">(</div><div class="line">    course_id int not null auto_increment primary key,</div><div class="line">    course_name varchar(10) not null</div><div class="line">) engine = innodb default charset = utf8;</div><div class="line"> </div><div class="line"> </div><div class="line">drop table <span class="keyword">if</span> exists studentcourse;</div><div class="line"> </div><div class="line">create table <span class="keyword">if</span> not exists studentcourse</div><div class="line">(</div><div class="line">    studentcourse_id int not null auto_increment primary key,</div><div class="line">    student_id int not null,</div><div class="line">    course_id int not null,</div><div class="line">    score int not null</div><div class="line">) engine = innodb default charset = utf8;</div><div class="line"> </div><div class="line">-- 以下数据表对应的数据记录数</div><div class="line">--      10  course</div><div class="line">--  70,000  student</div><div class="line">-- 700,000  studentcourse</div><div class="line">-- 根据以上要求准备测试数据</div><div class="line"> </div><div class="line">insert into course (course_id, course_name)</div><div class="line">select null as course_id, concat(<span class="string">'course'</span>, ID) as course_name</div><div class="line">from information_schema.`COLLATIONS`</div><div class="line">order by ID asc</div><div class="line"><span class="built_in">limit</span> 0, 10;</div><div class="line"> </div><div class="line">insert into student (student_id, student_name)</div><div class="line">select null as student_id, <span class="string">''</span> as student_name</div><div class="line">from ( </div><div class="line">    select 1 as column_order_id</div><div class="line">    from information_schema.`COLUMNS`</div><div class="line">    <span class="built_in">limit</span> 0, 3500</div><div class="line">) as t</div><div class="line">    cross join (</div><div class="line">        select 1 as collation_order_id</div><div class="line">        from information_schema.`COLUMNS`</div><div class="line">        <span class="built_in">limit</span> 0, 200</div><div class="line">    ) as t2;</div><div class="line">     </div><div class="line">update student</div><div class="line"><span class="built_in">set</span> student_name = concat(<span class="string">'student'</span>, student_id)</div><div class="line"><span class="built_in">where</span> student_name = <span class="string">''</span>;</div><div class="line"> </div><div class="line">insert into studentcourse (studentcourse_id, student_id, course_id, score)</div><div class="line">select null as studentcourse_id, t2.student_id, t.course_id, ceiling(rand()*100) as score</div><div class="line">from course as t</div><div class="line">    cross join student as t2;</div></pre></td></tr></table></figure></p>
@@ -227,75 +383,372 @@ classes that you can use:
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create index sc_score_index on studentcourse(score)</div></pre></td></tr></table></figure>
 <p>再次查询时间为：0.67sec,0.00sec,0.00sec,0.00sec,0.00sec 时间顿时又减少了一大截</p>
 <p>所以说在大型数据库的管理和优化上对于时间的要求是非常高的，我们通常用来模拟的数据都不过是凤毛麟角，所有才会有数据库管理员这个职业，同样的查询结果，错之毫厘，差之千里。对于原作者在执行计划和查询语句优化不是很懂所以等我弄懂再更啦。</p>
-<p>最后引用一下原作者的总结：<br>1.mysql嵌套子查询效率确实比较低<br>2.可以将其优化成连接查询<br>3.连接表时，可以先用where条件对表进行过滤，然后做表连接<br>（虽然mysql会对连表语句做优化）<br>4.建立合适的索引，必要时建立多列联合索引<br>5.学会分析sql执行计划，mysql会对sql进行优化，所以分析执行计划很重要</p>
-
-  </section>
-
-  
-  
-  
-  <!-- UY BEGIN -->
-<div id="uyan_frame"></div>
-<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js"></script>
-<!-- UY END -->
-  
-  
-  
-  <span id="busuanzi_container_page_uv">
-   本文总阅读量<span id="busuanzi_value_page_uv"></span>次
-</span>
-  
-</article>
-
-
-            <footer class="footer">
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
-    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
-    <span id="busuanzi_container_site_uv"> 
-  本站访客数<span id="busuanzi_value_site_uv"></span>人次
-</span>
-</footer>
-        </div>
+<p>最后引用一下原作者的总结：<br>1.mysql嵌套子查询效率确实比较低<br>2.可以将其优化成连接查询<br>3.连接表时，可以先用where条件对表进行过滤，然后做表连接<br>（虽然mysql会对连表语句做优化）<br>4.建立合适的索引，必要时建立多列联合索引</p>
+<h2 id="5-学会分析sql执行计划，mysql会对sql进行优化，所以分析执行计划很重要"><a href="#5-学会分析sql执行计划，mysql会对sql进行优化，所以分析执行计划很重要" class="headerlink" title="5.学会分析sql执行计划，mysql会对sql进行优化，所以分析执行计划很重要"></a>5.学会分析sql执行计划，mysql会对sql进行优化，所以分析执行计划很重要</h2>
+      
     </div>
 
-    <!-- js files -->
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/main.js"></script>
-    <script src="/js/scale.fix.js"></script>
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SQL优化-数据库：MySQL/" rel="tag"># SQL优化 数据库：MySQL</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/24/two/" rel="next" title="two">
+                <i class="fa fa-chevron-left"></i> two
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="xubo zhao" />
+          <p class="site-author-name" itemprop="name">xubo zhao</p>
+           
+              <p class="site-description motion-element" itemprop="description">stay hungry,stay foolish</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述："><span class="nav-number">1.</span> <span class="nav-text">问题描述：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#程序员除了和自己的语言打交道最多之外，剩下的便是同SQL语句了，用来操纵数据库。那么简答的命令在数据量非常小的时候基本上是可以忽略时间的，但是一旦数据量加大那么SQL优化就显得尤为重要。"><span class="nav-number">1.0.1.</span> <span class="nav-text">程序员除了和自己的语言打交道最多之外，剩下的便是同SQL语句了，用来操纵数据库。那么简答的命令在数据量非常小的时候基本上是可以忽略时间的，但是一旦数据量加大那么SQL优化就显得尤为重要。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#场景："><span class="nav-number">2.</span> <span class="nav-text">场景：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#课程表："><span class="nav-number">2.1.</span> <span class="nav-text">课程表：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#场景：-1"><span class="nav-number">3.</span> <span class="nav-text">场景：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#课程表：-1"><span class="nav-number">3.1.</span> <span class="nav-text">课程表：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#改为连接查询"><span class="nav-number">4.</span> <span class="nav-text">改为连接查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-学会分析sql执行计划，mysql会对sql进行优化，所以分析执行计划很重要"><span class="nav-number">5.</span> <span class="nav-text">5.学会分析sql执行计划，mysql会对sql进行优化，所以分析执行计划很重要</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xubo zhao</span>
+</div>
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_uv"> 
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
     
 
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
     
-
-    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript"> 
-        $(document).ready(function(){
-            MathJax.Hub.Config({ 
-                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
-            });
-        });
-    </script>
-
-
-    
-
-    <script src="/js/awesome-toc.min.js"></script>
     <script>
-        $(document).ready(function(){
-            $.awesome_toc({
-                overlay: true,
-                contentId: "post-content",
-            });
-        });
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "fe33423f514a486b9561df2048582c5f",
+        target: "cloud-tie-wrapper"
+      };
     </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
 
 
-    
-    
-    <!--kill ie6 -->
-<!--[if IE 6]>
-  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
-<![endif]-->
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>
