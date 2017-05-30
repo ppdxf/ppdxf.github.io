@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      SQLIndex 一次SQL不断优化的体验 | ppdxf 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="xubo zhao">
+    
+    
+
+    <meta name="description" content="这是我的用hexo搭建完成博客后的第一篇文章，最近刚好在研究SQL的优化，在博客中看到了其他博主的文章和评论，自己尝试的结果。原文地址 问题描述：程序员除了和自己的语言打交道最多之外，剩下的便是同SQL语句了，用来操纵数据库。那么简答的命令在数据量非常小的时候基本上是可以忽略时间的，但是一旦数据量加大那么SQL优化就显得尤为重要。 场景： 课程表：1234567create table Cours">
+<meta name="keywords" content="SQL优化 数据库：MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQLIndex 一次SQL不断优化的体验 | ppdxf">
+<meta property="og:url" content="http://ppdxf.com/2017/05/27/SQLIndex/index.html">
+<meta property="og:site_name" content="ppdxf">
+<meta property="og:description" content="这是我的用hexo搭建完成博客后的第一篇文章，最近刚好在研究SQL的优化，在博客中看到了其他博主的文章和评论，自己尝试的结果。原文地址 问题描述：程序员除了和自己的语言打交道最多之外，剩下的便是同SQL语句了，用来操纵数据库。那么简答的命令在数据量非常小的时候基本上是可以忽略时间的，但是一旦数据量加大那么SQL优化就显得尤为重要。 场景： 课程表：1234567create table Cours">
+<meta property="og:image" content="http://ppdxf.com/2017/05/27/SQLIndex/images/1495842119499.jpg">
+<meta property="og:image" content="http://oql36hmi5.bkt.clouddn.com/2.png">
+<meta property="og:image" content="http://oql36hmi5.bkt.clouddn.com/student_id.png">
+<meta property="og:image" content="http://ppdxf.com/2017/05/27/SQLIndex/images/1495842119499.jpg">
+<meta property="og:image" content="http://oql36hmi5.bkt.clouddn.com/2.png">
+<meta property="og:image" content="http://oql36hmi5.bkt.clouddn.com/student_id.png">
+<meta property="og:updated_time" content="2017-05-27T14:18:40.253Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQLIndex 一次SQL不断优化的体验 | ppdxf">
+<meta name="twitter:description" content="这是我的用hexo搭建完成博客后的第一篇文章，最近刚好在研究SQL的优化，在博客中看到了其他博主的文章和评论，自己尝试的结果。原文地址 问题描述：程序员除了和自己的语言打交道最多之外，剩下的便是同SQL语句了，用来操纵数据库。那么简答的命令在数据量非常小的时候基本上是可以忽略时间的，但是一旦数据量加大那么SQL优化就显得尤为重要。 场景： 课程表：1234567create table Cours">
+<meta name="twitter:image" content="http://ppdxf.com/2017/05/27/SQLIndex/images/1495842119499.jpg">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">ppdxf</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          尼古拉斯·旭博·赵的博客
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/myself" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">SQLIndex 一次SQL不断优化的体验</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2017-05-27" class="post-meta__date date">2017-05-27</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/SQL优化-数据库：MySQL/">SQL优化 数据库：MySQL</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>这是我的用hexo搭建完成博客后的第一篇文章，最近刚好在研究SQL的优化，在博客中看到了其他博主的文章和评论，自己尝试的结果。<br><a href="http://www.cnblogs.com/tangyanbo/p/4462734.htm#undefined" target="_blank" rel="external">原文地址</a></p>
+<h2 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h2><h4 id="程序员除了和自己的语言打交道最多之外，剩下的便是同SQL语句了，用来操纵数据库。那么简答的命令在数据量非常小的时候基本上是可以忽略时间的，但是一旦数据量加大那么SQL优化就显得尤为重要。"><a href="#程序员除了和自己的语言打交道最多之外，剩下的便是同SQL语句了，用来操纵数据库。那么简答的命令在数据量非常小的时候基本上是可以忽略时间的，但是一旦数据量加大那么SQL优化就显得尤为重要。" class="headerlink" title="程序员除了和自己的语言打交道最多之外，剩下的便是同SQL语句了，用来操纵数据库。那么简答的命令在数据量非常小的时候基本上是可以忽略时间的，但是一旦数据量加大那么SQL优化就显得尤为重要。"></a>程序员除了和自己的语言打交道最多之外，剩下的便是同SQL语句了，用来操纵数据库。那么简答的命令在数据量非常小的时候基本上是可以忽略时间的，但是一旦数据量加大那么SQL优化就显得尤为重要。</h4><hr>
+<h2 id="场景："><a href="#场景：" class="headerlink" title="场景："></a>场景：</h2><hr>
+<h3 id="课程表："><a href="#课程表：" class="headerlink" title="课程表："></a>课程表：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">create table Course(</div><div class="line"></div><div class="line">c_id int PRIMARY KEY,</div><div class="line"></div><div class="line">name varchar(10)</div><div class="line"></div><div class="line">)</div></pre></td></tr></table></figure>
+<p>学生表：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">create table Student(</div><div class="line"></div><div class="line">id int PRIMARY KEY,</div><div class="line"></div><div class="line">name varchar(10)</div><div class="line"></div><div class="line">)</div></pre></td></tr></table></figure></p>
+<p>学生成绩表：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">CREATE table SC(</div><div class="line"></div><div class="line">    sc_id int PRIMARY KEY,</div><div class="line"></div><div class="line">    s_id int,</div><div class="line"></div><div class="line">    c_id int,</div><div class="line"></div><div class="line">    score int</div><div class="line"></div><div class="line">)</div></pre></td></tr></table></figure></p>
+<p>因为大的数据量不容易模拟出来，所以借用评论下的模拟数据进行测试，程序如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line">drop table <span class="keyword">if</span> exists student;</div><div class="line"> </div><div class="line">create table <span class="keyword">if</span> not exists student</div><div class="line">(</div><div class="line">    student_id int not null auto_increment primary key,</div><div class="line">    student_name varchar(50) not null</div><div class="line">) engine = innodb default charset = utf8;</div><div class="line"> </div><div class="line"> </div><div class="line">drop table <span class="keyword">if</span> exists course;</div><div class="line"> </div><div class="line">create table <span class="keyword">if</span> not exists course</div><div class="line">(</div><div class="line">    course_id int not null auto_increment primary key,</div><div class="line">    course_name varchar(10) not null</div><div class="line">) engine = innodb default charset = utf8;</div><div class="line"> </div><div class="line"> </div><div class="line">drop table <span class="keyword">if</span> exists studentcourse;</div><div class="line"> </div><div class="line">create table <span class="keyword">if</span> not exists studentcourse</div><div class="line">(</div><div class="line">    studentcourse_id int not null auto_increment primary key,</div><div class="line">    student_id int not null,</div><div class="line">    course_id int not null,</div><div class="line">    score int not null</div><div class="line">) engine = innodb default charset = utf8;</div><div class="line"> </div><div class="line">-- 以下数据表对应的数据记录数</div><div class="line">--      10  course</div><div class="line">--  70,000  student</div><div class="line">-- 700,000  studentcourse</div><div class="line">-- 根据以上要求准备测试数据</div><div class="line"> </div><div class="line">insert into course (course_id, course_name)</div><div class="line">select null as course_id, concat(<span class="string">'course'</span>, ID) as course_name</div><div class="line">from information_schema.`COLLATIONS`</div><div class="line">order by ID asc</div><div class="line"><span class="built_in">limit</span> 0, 10;</div><div class="line"> </div><div class="line">insert into student (student_id, student_name)</div><div class="line">select null as student_id, <span class="string">''</span> as student_name</div><div class="line">from ( </div><div class="line">    select 1 as column_order_id</div><div class="line">    from information_schema.`COLUMNS`</div><div class="line">    <span class="built_in">limit</span> 0, 3500</div><div class="line">) as t</div><div class="line">    cross join (</div><div class="line">        select 1 as collation_order_id</div><div class="line">        from information_schema.`COLUMNS`</div><div class="line">        <span class="built_in">limit</span> 0, 200</div><div class="line">    ) as t2;</div><div class="line">     </div><div class="line">update student</div><div class="line"><span class="built_in">set</span> student_name = concat(<span class="string">'student'</span>, student_id)</div><div class="line"><span class="built_in">where</span> student_name = <span class="string">''</span>;</div><div class="line"> </div><div class="line">insert into studentcourse (studentcourse_id, student_id, course_id, score)</div><div class="line">select null as studentcourse_id, t2.student_id, t.course_id, ceiling(rand()*100) as score</div><div class="line">from course as t</div><div class="line">    cross join student as t2;</div></pre></td></tr></table></figure></p>
+<p>经过测试发现数据量为 学生表：<br><img src="./images/1495842119499.jpg" alt="学生表"></p>
+<p>学生成绩表：<br><img src="http://oql36hmi5.bkt.clouddn.com/2.png" alt="学生成绩表"></p>
+<p>成绩表：<br><img src="http://oql36hmi5.bkt.clouddn.com/student_id.png" alt="学生成绩表"></p>
+<p>数据量足够大：<br>因为其中100分的学生太多，所以我前面三个和后面三个学生course_id = 2 的成绩改为  105<br>查询语句：</p>
+<h2 id="场景：-1"><a href="#场景：-1" class="headerlink" title="场景："></a>场景：</h2><hr>
+<h3 id="课程表：-1"><a href="#课程表：-1" class="headerlink" title="课程表："></a>课程表：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">create table Course(</div><div class="line"></div><div class="line">c_id int PRIMARY KEY,</div><div class="line"></div><div class="line">name varchar(10)</div><div class="line"></div><div class="line">)</div></pre></td></tr></table></figure>
+<p>学生表：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">create table Student(</div><div class="line"></div><div class="line">id int PRIMARY KEY,</div><div class="line"></div><div class="line">name varchar(10)</div><div class="line"></div><div class="line">)</div></pre></td></tr></table></figure></p>
+<p>学生成绩表：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">CREATE table SC(</div><div class="line"></div><div class="line">    sc_id int PRIMARY KEY,</div><div class="line"></div><div class="line">    s_id int,</div><div class="line"></div><div class="line">    c_id int,</div><div class="line"></div><div class="line">    score int</div><div class="line"></div><div class="line">)</div></pre></td></tr></table></figure></p>
+<p>因为大的数据量不容易模拟出来，所以借用评论下的模拟数据进行测试，程序如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line">drop table <span class="keyword">if</span> exists student;</div><div class="line"> </div><div class="line">create table <span class="keyword">if</span> not exists student</div><div class="line">(</div><div class="line">    student_id int not null auto_increment primary key,</div><div class="line">    student_name varchar(50) not null</div><div class="line">) engine = innodb default charset = utf8;</div><div class="line"> </div><div class="line"> </div><div class="line">drop table <span class="keyword">if</span> exists course;</div><div class="line"> </div><div class="line">create table <span class="keyword">if</span> not exists course</div><div class="line">(</div><div class="line">    course_id int not null auto_increment primary key,</div><div class="line">    course_name varchar(10) not null</div><div class="line">) engine = innodb default charset = utf8;</div><div class="line"> </div><div class="line"> </div><div class="line">drop table <span class="keyword">if</span> exists studentcourse;</div><div class="line"> </div><div class="line">create table <span class="keyword">if</span> not exists studentcourse</div><div class="line">(</div><div class="line">    studentcourse_id int not null auto_increment primary key,</div><div class="line">    student_id int not null,</div><div class="line">    course_id int not null,</div><div class="line">    score int not null</div><div class="line">) engine = innodb default charset = utf8;</div><div class="line"> </div><div class="line">-- 以下数据表对应的数据记录数</div><div class="line">--      10  course</div><div class="line">--  70,000  student</div><div class="line">-- 700,000  studentcourse</div><div class="line">-- 根据以上要求准备测试数据</div><div class="line"> </div><div class="line">insert into course (course_id, course_name)</div><div class="line">select null as course_id, concat(<span class="string">'course'</span>, ID) as course_name</div><div class="line">from information_schema.`COLLATIONS`</div><div class="line">order by ID asc</div><div class="line"><span class="built_in">limit</span> 0, 10;</div><div class="line"> </div><div class="line">insert into student (student_id, student_name)</div><div class="line">select null as student_id, <span class="string">''</span> as student_name</div><div class="line">from ( </div><div class="line">    select 1 as column_order_id</div><div class="line">    from information_schema.`COLUMNS`</div><div class="line">    <span class="built_in">limit</span> 0, 3500</div><div class="line">) as t</div><div class="line">    cross join (</div><div class="line">        select 1 as collation_order_id</div><div class="line">        from information_schema.`COLUMNS`</div><div class="line">        <span class="built_in">limit</span> 0, 200</div><div class="line">    ) as t2;</div><div class="line">     </div><div class="line">update student</div><div class="line"><span class="built_in">set</span> student_name = concat(<span class="string">'student'</span>, student_id)</div><div class="line"><span class="built_in">where</span> student_name = <span class="string">''</span>;</div><div class="line"> </div><div class="line">insert into studentcourse (studentcourse_id, student_id, course_id, score)</div><div class="line">select null as studentcourse_id, t2.student_id, t.course_id, ceiling(rand()*100) as score</div><div class="line">from course as t</div><div class="line">    cross join student as t2;</div></pre></td></tr></table></figure></p>
+<p>经过测试发现数据量为：<br><img src="./images/1495842119499.jpg" alt="学生表"></p>
+<p><img src="http://oql36hmi5.bkt.clouddn.com/2.png" alt="学生成绩表"></p>
+<p>因为其中100分的学生太多，所以我前面三个和后面三个学生course_id = 2 的成绩改为  105</p>
+<ol>
+<li>查询语句(未建立索引)：<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select s.* from student s <span class="built_in">where</span> s.student_id <span class="keyword">in</span> (select student_id from studentcourse sc <span class="built_in">where</span> sc.course_id = 2 and sc.score = 105)</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>查询时间分别为：4.56sec, 5.07sec, 4.10sec, 4.27sec, 3.97sec<br>1.1 只建立子查询：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select student_id from studentcourse sc <span class="built_in">where</span> sc.course_id = 2 and sc.score = 105</div></pre></td></tr></table></figure></p>
+<p>查询时间：3.68sec,3.95sec,3.82sec,4.09sec,4.21sec<br><img src="http://oql36hmi5.bkt.clouddn.com/student_id.png" alt="学生成绩表"></p>
+<p>1.2 包含查询<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select s.* from student s <span class="built_in">where</span> s.student_id <span class="keyword">in</span> (21,22,23,46816,46819,46820)</div></pre></td></tr></table></figure></p>
+<p>查询时间：0.01sec,0.00sec,0.00sec,0.01sec,0.00sec<br>2.查询语句（建立索引）<br>2.1 建立索引：<br>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create index sc_c_id_index on studentcourse(course_id)</div></pre></td></tr></table></figure></p>
+<pre><code><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create index sc_score_index on studentcourse(score)</div></pre></td></tr></table></figure>
+</code></pre><p>2.2 建立索引之后的查询语句：<br>同第一条查询语句：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select s.* from student s <span class="built_in">where</span> s.student_id <span class="keyword">in</span> (select student_id from studentcourse sc <span class="built_in">where</span> sc.course_id = 2 and sc.score = 105)</div></pre></td></tr></table></figure></p>
+<p>查询时间分别为:0.01sec,0.00sec,0.00sec,0.00sec,0.00sec<br>可以看到添加索引以后查询时间大大缩减：<br>索引：索引是对数据库表中一列或多列的值进行排序的一种结构，使用索引可快速访问数据库表中的特定信息。<br>技术原理：索引是对数据库表中一个或多个列（例如，employee 表的姓名 (name) 列）的值进行排序的结构。如果想按特定职员的姓来查找他或她，则与在表中搜索所有的行相比，索引有助于更快地获取信息。<br>个人简单理解：为需要查询的信息加上一个标签，类似于快速定位查询信息</p>
+<h2 id="改为连接查询"><a href="#改为连接查询" class="headerlink" title="改为连接查询"></a>改为连接查询</h2><p>1.查询语句：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">SELECT s.* from </div><div class="line">Student s</div><div class="line">INNER JOIN SC sc</div><div class="line">on sc.s_id = s.s_id</div><div class="line"><span class="built_in">where</span> sc.c_id=0 and sc.score=100</div></pre></td></tr></table></figure></p>
+<p>为了方便分析所以需要暂时关闭索引：<br>1.1 关闭语句<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">drop index sc_c_id_index on studentcourse</div></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">drop index sc_score_index on studentcouse</div></pre></td></tr></table></figure>
+<p>查询时间：3.68sec,3.73sec,3.65sec,3.67sec,3.69sec<br>在给sc的student_id 建立一个索引<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create index sc_s_id_index on studentcourse(student_id)</div></pre></td></tr></table></figure></p>
+<p>再次查询时间：17.33sec,18.18sec,18.24sec,17.72sec,18.50sec<br>优化后的sql<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">SELECT</div><div class="line">    s.*</div><div class="line">FROM</div><div class="line">    (</div><div class="line">        SELECT</div><div class="line">            *</div><div class="line">        FROM</div><div class="line">            SC sc</div><div class="line">        WHERE</div><div class="line">            sc.c_id = 2</div><div class="line">        AND sc.score = 105</div><div class="line">    ) t</div><div class="line">INNER JOIN Student s ON t.s_id = s.s_id</div></pre></td></tr></table></figure></p>
+<p>查询时间为：4.80sec,3.54sec,3.74sec,3.68,3.75sec<br>时间恢复到建立索引之前的状态<br>明确建立索引：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create index sc_c_id_index on studentcourse(course_id)</div></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create index sc_score_index on studentcourse(score)</div></pre></td></tr></table></figure>
+<p>再次查询时间为：0.67sec,0.00sec,0.00sec,0.00sec,0.00sec 时间顿时又减少了一大截</p>
+<p>所以说在大型数据库的管理和优化上对于时间的要求是非常高的，我们通常用来模拟的数据都不过是凤毛麟角，所有才会有数据库管理员这个职业，同样的查询结果，错之毫厘，差之千里。对于原作者在执行计划和查询语句优化不是很懂所以等我弄懂再更啦。</p>
+<p>最后引用一下原作者的总结：<br>1.mysql嵌套子查询效率确实比较低<br>2.可以将其优化成连接查询<br>3.连接表时，可以先用where条件对表进行过滤，然后做表连接<br>（虽然mysql会对连表语句做优化）<br>4.建立合适的索引，必要时建立多列联合索引<br>5.学会分析sql执行计划，mysql会对sql进行优化，所以分析执行计划很重要</p>
+
+  </section>
+
+  
+  
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
