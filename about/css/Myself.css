@@ -1,0 +1,34 @@
+*{list-style: none;}
+#d_1{height: 80px;width: 100%;background: #2C3E50;}
+#d_1_1{height: 80px;width: 300px;margin: 0px auto;}
+h4{margin: 0px auto;font-size: 50px;color: white;text-align: center;}
+
+#img{width: 100%;height: 650px;z-index: -1;opacity: 0.8;display: none;}
+h1{color: white; position: absolute;font-size: 30px;font-size: 80px;z-index: 1;border-top: 7px solid white;border-bottom: 7px solid white; left: 50px;font-family: '微软雅黑';}
+h2{color: white; position: absolute;font-size: 30px;font-size: 60px;z-index: 1;left: 450px;top: 130px;}
+#d_2_1{height: 600px;width: 1000px;position: absolute;z-index: 2;left: 500px;}
+#d_3{height: 300px;width: 1000px;margin: 0px auto;}
+#d_3_1{width:75px;height: 300px;olid red;background: #2C3E50;}
+#d_3_2{height: 300px;width:800px;position: relative;top: -300px;left: 80px;display: none;}
+#d_3_2 ul{list-style: none;line-height: 40px;}
+#d_3_2 ul li{font-size: 20px;color: #2C3E50;font-family: "微软雅黑";background-repeat: no-repeat;padding-left: 100px;}
+#img2{position:absolute;left:500px;top:0px;height: 250px;}
+
+h3{color: white;font-size: 30px;font-family: "微软雅黑";padding-left: 8px;}
+#d_4{height: 300px;width: 1000px;margin: 0px auto;position: relative;top: 60px;}
+#d_4_1{width:75px;height: 300px;background: #2C3E50;left: 925px;position: relative;}
+#d_4_2{height: 300px;width:800px;position: relative;top: -300px;left: 80px;display: none;}
+#d_4_2 ul{list-style: none;line-height: 40px;position: relative;left: 130px;}
+#d_4_2 ul li{height: 25px;width: 500px;background: #E6E6E8;}
+#d_4_2_1{height: 25px;width: 300px;background: #2C3E50;}
+#d_4_2_2{height: 25px;width:250px;background: #2C3E50;}
+#d_4_2_3{height: 25px;width: 270px;background: #2C3E50;}
+#d_4_2_4{height: 25px;width: 200px;background: #2C3E50;}
+
+
+#d_5{height: 300px;width: 1000px;margin: 0px auto;position: relative;top: 170px;}
+#d_5_1{width:75px;height: 500px;background: #2C3E50;}
+#d_5_2{height: 500px;width:800px;position: relative;top: -500px;left: 130px;font-size: 20px;font-family: "微软雅黑";
+line-height: 40px;color: #2C3E50;display: none;}
+
+
